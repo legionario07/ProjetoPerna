@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria implements Serializable {
+@Table(name = "marca")
+public class Marca implements Serializable {
 
 	/**
 	 * 
@@ -24,18 +24,18 @@ public class Categoria implements Serializable {
 	@Column(unique = true, nullable =false)
 	private String nome;
 	
-	public Categoria(Long id, String nome) {
+	private Marca(Long id, String nome) {
 		this();
 		this.id = id;
 		this.nome = nome;
 	}
 	
-	public Categoria(Long id) {
+	public Marca(Long id) {
 		this();
 		this.id = id;
 	}
 	
-	private Categoria() {
+	public Marca() {
 		
 	}
 
@@ -76,7 +76,7 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Marca other = (Marca) obj;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;

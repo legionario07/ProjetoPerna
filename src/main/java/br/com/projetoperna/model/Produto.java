@@ -45,8 +45,6 @@ public class Produto implements Serializable {
 	private String EAN;
 	@Column(name="is_ativo")
 	private boolean isAtivo;
-	@Column(name="is_sub_produto")
-	private boolean isSubProduto;
 	@OneToOne
 	private UnidadeDeMedida unidadeDeMedida;
 	@Column(name ="data_cadastro")
@@ -54,9 +52,7 @@ public class Produto implements Serializable {
 	@JsonDeserialize(using = JsonCalendarDeserializer.class)
 	private Calendar dataCadastro;
 	@ManyToOne
-	private Produto produtoPai;
-	@Column(name="qtde_divisao")
-	private Integer qteDivisao;
+	private Marca marca;
 	
 	public Produto(Long id) {
 		this();
@@ -66,7 +62,8 @@ public class Produto implements Serializable {
 	public Produto() {
 		//Por Default o produto inicia-se como Ativo no cadastro
 		this.isAtivo = true;
-		unidadeDeMedida = new UnidadeDeMedida();
+		this.unidadeDeMedida = new UnidadeDeMedida();
+		this.marca = new Marca();
 		this.dataCadastro = Calendar.getInstance();
 	}
 
@@ -165,30 +162,14 @@ public class Produto implements Serializable {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public boolean isSubProduto() {
-		return isSubProduto;
+	public Marca getMarca() {
+		return marca;
 	}
 
-	public void setSubProduto(boolean isSubProduto) {
-		this.isSubProduto = isSubProduto;
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 
-	public Produto getProdutoPai() {
-		return produtoPai;
-	}
-
-	public void setProdutoPai(Produto produtoPai) {
-		this.produtoPai = produtoPai;
-	}
-
-	public Integer getQteDivisao() {
-		return qteDivisao;
-	}
-
-	public void setQteDivisao(Integer qteDivisao) {
-		this.qteDivisao = qteDivisao;
-	}
-	
 	public void decrementarProduto(Integer valorADecrementar) {
 		if(qtde<=valorADecrementar) {
 			qtde = 0;

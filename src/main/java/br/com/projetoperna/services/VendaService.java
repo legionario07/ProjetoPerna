@@ -55,35 +55,43 @@ public class VendaService {
 		 * Deverá ser verificado se é ultima unidade de X para decrementar
 		 */
 		
-		Map<Produto, Integer> mapProdutos = new HashMap<Produto, Integer>();
+//		Map<Produto, Integer> mapProdutos = new HashMap<Produto, Integer>();
+//		
+//		//É um subProduto, se for adiciona no map com sua frequencia
+//		for(Produto p : venda.getProdutos()) {
+//			if(p.isSubProduto()) {
+//				if(mapProdutos.containsKey(p)) {
+//					Integer valor = mapProdutos.get(p);
+//					mapProdutos.put(p, valor++);
+//				}else {
+//					mapProdutos.put(p, 1);
+//				}
+//			}
+//		}
+//		
+//		Set<Produto> keys = mapProdutos.keySet();
+//		
+//		for(Produto produtoKey : keys) {
+//			Integer total = mapProdutos.get(produtoKey);
+//			if(total>=produtoKey.getQteDivisao()) {
+//				Integer valorADecrementar = total/produtoKey.getQteDivisao();
+//				produtoKey.decrementarProduto(valorADecrementar);
+//				
+//				produtoRepo.save(produtoKey);
+//				
+//			}
+//			
+//		}
 		
-		//É um subProduto, se for adiciona no map com sua frequencia
-		for(Produto p : venda.getProdutos()) {
-			if(p.isSubProduto()) {
-				if(mapProdutos.containsKey(p)) {
-					Integer valor = mapProdutos.get(p);
-					mapProdutos.put(p, valor++);
-				}else {
-					mapProdutos.put(p, 1);
-				}
-			}
+		try {
+		 venda = vendaRepo.save(venda);
+		}catch(Exception e) {
+			return null;
 		}
 		
-		Set<Produto> keys = mapProdutos.keySet();
+		return venda;
 		
-		for(Produto produtoKey : keys) {
-			Integer total = mapProdutos.get(produtoKey);
-			if(total>=produtoKey.getQteDivisao()) {
-				Integer valorADecrementar = total/produtoKey.getQteDivisao();
-				produtoKey.decrementarProduto(valorADecrementar);
-				
-				produtoRepo.save(produtoKey);
-				
-			}
-			
-		}
 		
-		return vendaRepo.save(venda);
 	}
 
 	public boolean delete(Long id) {
