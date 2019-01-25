@@ -38,9 +38,7 @@ public class Venda implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name="data_venda")
-	@Temporal(TemporalType.DATE)
-	@JsonDeserialize(using = JsonCalendarDeserializer.class)
-	private Calendar dataVenda;
+	private Long dataVenda;
 	@Column(name="valor_total")
 	private BigDecimal valorTotal;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -56,7 +54,6 @@ public class Venda implements Serializable {
 	public Venda() {
 		this.pedidos = new ArrayList<Pedido>();
 		this.usuario = new Usuario();
-		this.dataVenda = Calendar.getInstance();
 	}
 	
 	public Long getId() {
@@ -65,12 +62,7 @@ public class Venda implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Calendar getDataVenda() {
-		return dataVenda;
-	}
-	public void setDataVenda(Calendar dataVenda) {
-		this.dataVenda = dataVenda;
-	}
+
 	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
@@ -88,6 +80,14 @@ public class Venda implements Serializable {
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Long getDataVenda() {
+		return dataVenda;
+	}
+
+	public void setDataVenda(Long dataVenda) {
+		this.dataVenda = dataVenda;
 	}
 	
 	

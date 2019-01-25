@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import br.com.projetoperna.utils.JsonCalendarDeserializer;
 
-@JsonAutoDetect
+//@JsonAutoDetect
 @Entity
 @Table(name ="produto")
 public class Produto implements Serializable {
@@ -51,9 +51,7 @@ public class Produto implements Serializable {
 	@OneToOne
 	private UnidadeDeMedida unidadeDeMedida;
 	@Column(name ="data_cadastro")
-	@Temporal(TemporalType.DATE)
-	@JsonDeserialize(using = JsonCalendarDeserializer.class)
-	private Calendar dataCadastro;
+	private Long dataCadastro;
 	@ManyToOne
 	private Marca marca;
 	@ManyToOne
@@ -69,7 +67,6 @@ public class Produto implements Serializable {
 		this.isAtivo = true;
 		this.unidadeDeMedida = new UnidadeDeMedida();
 		this.marca = new Marca();
-		this.dataCadastro = Calendar.getInstance();
 		this.categoria = new Categoria();
 	}
 
@@ -160,13 +157,6 @@ public class Produto implements Serializable {
 				+ ", isAtivo=" + isAtivo + ", unidadeDeMedida=" + unidadeDeMedida + "]";
 	}
 
-	public Calendar getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Calendar dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
 
 	public Marca getMarca() {
 		return marca;
@@ -190,6 +180,14 @@ public class Produto implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Long getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Long dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 }

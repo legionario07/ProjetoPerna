@@ -27,9 +27,7 @@ public class JsonCalendarDeserializer extends JsonDeserializer<Calendar> {
 	@Override
 	public Calendar deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
-		Calendar c = Calendar.getInstance();
-		Produto produto = (Produto) p.getParsingContext().getParent().getCurrentValue();
-		return produto.getDataCadastro();
+		return null;
 
 	}
 
