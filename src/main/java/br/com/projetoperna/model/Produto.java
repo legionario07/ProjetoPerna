@@ -53,6 +53,8 @@ public class Produto implements Serializable {
 	private Calendar dataCadastro;
 	@ManyToOne
 	private Marca marca;
+	@ManyToOne
+	private Categoria categoria;
 	
 	public Produto(Long id) {
 		this();
@@ -65,6 +67,7 @@ public class Produto implements Serializable {
 		this.unidadeDeMedida = new UnidadeDeMedida();
 		this.marca = new Marca();
 		this.dataCadastro = Calendar.getInstance();
+		this.categoria = new Categoria();
 	}
 
 	public Long getId() {
@@ -176,6 +179,14 @@ public class Produto implements Serializable {
 		}else {
 			qtde = qtde - valorADecrementar;
 		}
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }

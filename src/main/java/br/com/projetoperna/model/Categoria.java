@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
 		this.id = id;
 	}
 	
-	private Categoria() {
+	public Categoria() {
 		
 	}
 
