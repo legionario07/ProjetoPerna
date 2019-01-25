@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.projetoperna.model.Pedido;
+import br.com.projetoperna.model.Produto;
 import br.com.projetoperna.model.Venda;
 import br.com.projetoperna.repository.PedidoRepository;
 import br.com.projetoperna.repository.ProdutoRepository;
@@ -55,6 +56,9 @@ public class VendaService {
 			
 			for(Pedido pedido : venda.getPedidos()) {
 				pedidoRepo.save(pedido);
+				Produto produto = pedido.getProduto();
+				produto.decrementarProduto(pedido.getTotal());
+				produtoRepo.save(produto);
 			}
 			
 		 venda = vendaRepo.save(venda);
