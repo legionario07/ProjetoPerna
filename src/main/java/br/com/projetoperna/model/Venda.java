@@ -19,11 +19,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import br.com.projetoperna.utils.JsonCalendarDeserializer;
 
-
+@JsonAutoDetect
 @Entity
 @Table(name = "venda")
 public class Venda implements Serializable {

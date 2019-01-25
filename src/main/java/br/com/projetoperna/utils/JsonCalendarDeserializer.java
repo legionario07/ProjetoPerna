@@ -1,8 +1,6 @@
 package br.com.projetoperna.utils;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.springframework.stereotype.Component;
@@ -11,6 +9,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+
+import br.com.projetoperna.model.Produto;
 
 /**
  * Created by PauLinHo on 26/07/2017.
@@ -28,10 +28,9 @@ public class JsonCalendarDeserializer extends JsonDeserializer<Calendar> {
 	public Calendar deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
 		Calendar c = Calendar.getInstance();
-		String value = p.getValueAsString();
-		c.setTimeInMillis(Long.valueOf(value));
+		Produto produto = (Produto) p.getParsingContext().getParent().getCurrentValue();
+		return produto.getDataCadastro();
 
-		return c;
 	}
 
 }

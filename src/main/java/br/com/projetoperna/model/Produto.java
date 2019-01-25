@@ -15,19 +15,22 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import br.com.projetoperna.utils.JsonCalendarDeserializer;
 
+@JsonAutoDetect
 @Entity
 @Table(name ="produto")
 public class Produto implements Serializable {
 
+
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 2923242432699616549L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -42,7 +45,7 @@ public class Produto implements Serializable {
 	@Column(name = "qtde_minima")
 	private Integer qtdeMinima;
 	@Column(unique = true)
-	private String EAN;
+	private String ean;
 	@Column(name="is_ativo")
 	private boolean isAtivo;
 	@OneToOne
@@ -126,12 +129,12 @@ public class Produto implements Serializable {
 		this.qtdeMinima = qtdeMinima;
 	}
 
-	public String getEAN() {
-		return EAN;
+	public String getEan() {
+		return ean;
 	}
 
-	public void setEAN(String eAN) {
-		EAN = eAN;
+	public void setEan(String eAN) {
+		ean = eAN;
 	}
 
 	public boolean isAtivo() {
@@ -153,7 +156,7 @@ public class Produto implements Serializable {
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valorCompra=" + valorCompra
-				+ ", valorVenda=" + valorVenda + ", qtde=" + qtde + ", qtdeMinima=" + qtdeMinima + ", EAN=" + EAN
+				+ ", valorVenda=" + valorVenda + ", qtde=" + qtde + ", qtdeMinima=" + qtdeMinima + ", EAN=" + ean
 				+ ", isAtivo=" + isAtivo + ", unidadeDeMedida=" + unidadeDeMedida + "]";
 	}
 
