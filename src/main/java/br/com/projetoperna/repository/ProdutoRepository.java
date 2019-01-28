@@ -9,5 +9,6 @@ import br.com.projetoperna.model.Produto;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	Produto findByNome(String nome);
+	Produto findByEanPai(String eanPai);
 	
 }

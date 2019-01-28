@@ -63,12 +63,18 @@ public class VendaService {
 				if(pedido.getProduto() instanceof Produto) {
 					Produto produto = (Produto) pedido.getProduto();
 					produto.decrementarProduto(pedido.getTotal());
+					
+					validarSubProduto(produto);
+					
 					produtoRepo.save(produto);
 				}else {
 					
 					Combo combo = (Combo) pedido.getProduto();
 					for(Produto p : combo.getProdutos()) {
 						p.decrementarProduto(1);
+						
+						validarSubProduto(p);
+						
 						produtoRepo.save(p);
 					}
 					
@@ -95,6 +101,25 @@ public class VendaService {
 		}
 
 		return true;
+	}
+	
+	private void validarSubProduto(Produto produto) {
+		
+		if(produto.isSubProduto()) {
+			Integer resto = produto.getQtde()/produto.getQtdeSubProduto();
+			if((resto*produto.getQtdeSubProduto()<produto.getQtde())) {
+				resto++;
+			}
+			
+			Produto paiProduto = produtoRepo.findByEanPai(produto.getEanPai());
+			
+			if(paiProduto!=null) {
+				paiProduto.setQtde(resto);
+				produtoRepo.save(paiProduto);
+			}
+			
+		}
+		
 	}
 
 }

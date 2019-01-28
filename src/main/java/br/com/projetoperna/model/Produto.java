@@ -58,6 +58,10 @@ public class Produto extends Mercadoria implements Serializable {
 	private Categoria categoria;
 	@Column(name = "ean_pai")
 	private String eanPai;
+	@Column(name = "is_sub_produto")
+	private boolean isSubProduto;
+	@Column(name = "qtde_sub_produto")
+	private Integer qtdeSubProduto;
 	
 	public Produto(Long id) {
 		this();
@@ -198,6 +202,22 @@ public class Produto extends Mercadoria implements Serializable {
 
 	public void setEanPai(String eanPai) {
 		this.eanPai = eanPai;
+	}
+
+	public boolean isSubProduto() {
+		return isSubProduto;
+	}
+
+	public void setSubProduto(boolean isSubProduto) {
+		this.isSubProduto = isSubProduto;
+	}
+
+	public Integer getQtdeSubProduto() {
+		return qtdeSubProduto;
+	}
+
+	public void setQtdeSubProduto(Integer qtdeSubProduto) {
+		this.qtdeSubProduto = qtdeSubProduto;
 	}
 
 }
