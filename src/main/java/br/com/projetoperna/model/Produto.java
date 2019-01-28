@@ -56,6 +56,8 @@ public class Produto extends Mercadoria implements Serializable {
 	private Marca marca;
 	@ManyToOne
 	private Categoria categoria;
+	@Column(name = "ean_pai")
+	private String eanPai;
 	
 	public Produto(Long id) {
 		this();
@@ -188,6 +190,14 @@ public class Produto extends Mercadoria implements Serializable {
 
 	public void setDataCadastro(Long dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+
+	public String getEanPai() {
+		return eanPai;
+	}
+
+	public void setEanPai(String eanPai) {
+		this.eanPai = eanPai;
 	}
 
 }
