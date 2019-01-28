@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "combo")
-public class Combo implements Serializable{
+public class Combo extends Mercadoria implements Serializable{
 
 	/**
 	 * 

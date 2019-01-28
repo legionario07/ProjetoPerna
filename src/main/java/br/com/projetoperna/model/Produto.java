@@ -23,7 +23,7 @@ import br.com.projetoperna.utils.JsonCalendarDeserializer;
 //@JsonAutoDetect
 @Entity
 @Table(name ="produto")
-public class Produto implements Serializable {
+public class Produto extends Mercadoria implements Serializable {
 
 
 	
