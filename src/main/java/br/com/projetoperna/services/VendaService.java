@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.projetoperna.model.Combo;
 import br.com.projetoperna.model.Pedido;
 import br.com.projetoperna.model.Produto;
 import br.com.projetoperna.model.Venda;
@@ -56,9 +57,23 @@ public class VendaService {
 			
 			for(Pedido pedido : venda.getPedidos()) {
 				pedidoRepo.save(pedido);
-				Produto produto = pedido.getProduto();
-				produto.decrementarProduto(pedido.getTotal());
-				produtoRepo.save(produto);
+				
+				
+				//É combo ou produto?
+				if(pedido.getProduto() instanceof Produto) {
+					Produto produto = (Produto) pedido.getProduto();
+					produto.decrementarProduto(pedido.getTotal());
+					produtoRepo.save(produto);
+				}else {
+					
+					Combo combo = (Combo) pedido.getProduto();
+					for(Produto p : combo.getProdutos()) {
+						p.decrementarProduto(1);
+						produtoRepo.save(p);
+					}
+					
+				}
+				
 			}
 			
 		 venda = vendaRepo.save(venda);
