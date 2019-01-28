@@ -24,9 +24,7 @@ public class Combo extends Mercadoria implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	
 	
 	@Column(unique=true)
 	private String nome;
@@ -40,13 +38,6 @@ public class Combo extends Mercadoria implements Serializable{
 
 	@Column(unique = true)
 	private String ean;
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -87,7 +78,7 @@ public class Combo extends Mercadoria implements Serializable{
 	
 	public Combo(Long id) {
 		this();
-		this.id = id;
+		this.setId(id);
 	}
 	
 	public Combo() {

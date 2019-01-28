@@ -70,7 +70,6 @@ public class Pedido implements Serializable {
 	}
 	
 	public Pedido() {
-		this.produto = new Produto();
 	}
 	
 	public Long getId() {

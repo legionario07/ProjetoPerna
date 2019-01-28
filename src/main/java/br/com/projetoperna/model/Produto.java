@@ -2,7 +2,6 @@ package br.com.projetoperna.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import br.com.projetoperna.utils.JsonCalendarDeserializer;
 
 //@JsonAutoDetect
 @Entity
@@ -31,9 +23,7 @@ public class Produto extends Mercadoria implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2923242432699616549L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	
 	@Column(nullable = false)
 	private String nome;
 	private String descricao;
@@ -65,7 +55,7 @@ public class Produto extends Mercadoria implements Serializable {
 	
 	public Produto(Long id) {
 		this();
-		this.id = id;
+		this.setId(id);
 	}
 	
 	public Produto() {
@@ -76,14 +66,7 @@ public class Produto extends Mercadoria implements Serializable {
 		this.categoria = new Categoria();
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -158,7 +141,7 @@ public class Produto extends Mercadoria implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", valorCompra=" + valorCompra
+		return "Produto [id=" + getId() + ", nome=" + nome + ", descricao=" + descricao + ", valorCompra=" + valorCompra
 				+ ", valorVenda=" + valorVenda + ", qtde=" + qtde + ", qtdeMinima=" + qtdeMinima + ", EAN=" + ean
 				+ ", isAtivo=" + isAtivo + ", unidadeDeMedida=" + unidadeDeMedida + "]";
 	}
