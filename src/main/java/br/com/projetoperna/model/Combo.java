@@ -30,6 +30,16 @@ public class Combo extends Mercadoria implements Serializable{
 	
 	@Column(unique=true)
 	private String nome;
+	public String getEan() {
+		return ean;
+	}
+
+	public void setEan(String ean) {
+		this.ean = ean;
+	}
+
+	@Column(unique = true)
+	private String ean;
 	public Long getId() {
 		return id;
 	}
