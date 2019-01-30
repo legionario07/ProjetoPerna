@@ -69,19 +69,19 @@ public class VendaService {
 
 					produtoRepo.save(produto);
 				} else {
-
-					Combo combo = (Combo) pedido.getProduto();
-					for (Produto p : combo.getProdutos()) {
-						p.decrementarProduto(1);
-
-						if (p.isSubProduto()) {
-							validarSubProduto(p);
-						} else {
-							validarProdutoPai(p, pedido.getTotal());
-						}
-
-						produtoRepo.save(p);
-					}
+//
+//					Combo combo = (Combo) pedido.getProduto();
+//					for (Produto p : combo.getProdutos()) {
+//						p.decrementarProduto(1);
+//
+//						if (p.isSubProduto()) {
+//							validarSubProduto(p);
+//						} else {
+//							validarProdutoPai(p, pedido.getTotal());
+//						}
+//
+//						produtoRepo.save(p);
+//					}
 
 				}
 

@@ -27,7 +27,9 @@ public class Pedido implements Serializable {
 	@Column(name="valor_total")
 	private BigDecimal valorTotal;
 	@OneToOne
-	private Mercadoria produto;
+	private Produto produto;
+	@OneToOne
+	private Combo combo;
 	private Integer total;
 	private BigDecimal desconto;
 
@@ -41,18 +43,18 @@ public class Pedido implements Serializable {
 		this.desconto = desconto;
 	}
 
-	public Pedido(BigDecimal valorTotal, Mercadoria produto, Integer total) {
-		super();
+	public Pedido(BigDecimal valorTotal, Produto produto, Integer total) {
+		this();
 		this.valorTotal = valorTotal;
 		this.produto = produto;
 		this.total = total;
 	}
 
-	public Mercadoria getProduto() {
+	public Produto getProduto() {
 		return produto;
 	}
 
-	public void setProduto(Mercadoria produto) {
+	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
 
@@ -70,6 +72,7 @@ public class Pedido implements Serializable {
 	}
 	
 	public Pedido() {
+		this.combo = new Combo();
 	}
 	
 	public Long getId() {
@@ -83,6 +86,14 @@ public class Pedido implements Serializable {
 	}
 	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public Combo getCombo() {
+		return combo;
+	}
+
+	public void setCombo(Combo combo) {
+		this.combo = combo;
 	}
 	
 
