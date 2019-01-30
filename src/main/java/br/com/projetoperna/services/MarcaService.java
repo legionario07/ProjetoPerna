@@ -23,7 +23,7 @@ public class MarcaService {
 	}
 
 	public List<Marca> findAll() {
-		return MarcaRepo.findAll();
+		return MarcaRepo.findAllByOrderByNomeAsc();
 	}
 
 	public Marca save(Marca marca) {

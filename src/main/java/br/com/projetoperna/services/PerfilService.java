@@ -23,7 +23,7 @@ public class PerfilService {
 	}
 
 	public List<Perfil> findAll() {
-		return perfilRepo.findAll();
+		return perfilRepo.findAllByOrderByNomeAsc();
 	}
 
 	public Perfil save(Perfil perfil) {

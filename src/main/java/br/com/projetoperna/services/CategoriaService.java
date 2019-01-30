@@ -23,7 +23,7 @@ public class CategoriaService {
 	}
 
 	public List<Categoria> findAll() {
-		return CategoriaRepo.findAll();
+		return CategoriaRepo.findAllByOrderByNomeAsc();
 	}
 
 	public Categoria save(Categoria Categoria) {

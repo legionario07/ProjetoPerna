@@ -23,7 +23,7 @@ public class ConfiguracaoService {
 	}
 
 	public List<Configuracao> findAll() {
-		return ConfiguracaoRepo.findAll();
+		return ConfiguracaoRepo.findAllByOrderByPropriedadeAsc();
 	}
 
 	public Configuracao save(Configuracao Configuracao) {

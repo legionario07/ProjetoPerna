@@ -23,7 +23,7 @@ public class ProdutoService {
 	}
 
 	public List<Produto> findAll() {
-		return ProdutoRepo.findAll();
+		return ProdutoRepo.findAllByOrderByNomeAsc();
 	}
 
 	public Produto save(Produto Produto) {

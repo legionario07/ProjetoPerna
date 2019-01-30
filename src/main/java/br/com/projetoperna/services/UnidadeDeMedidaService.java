@@ -23,7 +23,7 @@ public class UnidadeDeMedidaService {
 	}
 
 	public List<UnidadeDeMedida> findAll() {
-		return UnidadeDeMedidaRepo.findAll();
+		return UnidadeDeMedidaRepo.findAllByOrderByTipoAsc();
 	}
 
 	public UnidadeDeMedida save(UnidadeDeMedida UnidadeDeMedida) {
