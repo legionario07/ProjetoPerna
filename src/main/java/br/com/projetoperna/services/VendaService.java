@@ -134,7 +134,7 @@ public class VendaService {
 		Produto produtoSubProduto = produtoRepo.findByEanPai(produto.getEan());
 
 		if (produtoSubProduto != null) {
-			Integer resto = produtoSubProduto.getQtde() * qtde;
+			Integer resto = produtoSubProduto.getQtdeSubProduto() * qtde;
 			
 			if (produtoSubProduto.getQtde() - resto < 0) {
 				produtoSubProduto.setQtde(0);
