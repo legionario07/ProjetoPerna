@@ -39,9 +39,6 @@ public class ComboService {
 	@Transactional
 	public Combo save(Combo combo) {
 		
-		combo.setCategoria(catRepo.findById(1l).get());
-		combo.setUnidadeDeMedida(uniRepo.findById(1l).get());
-		
 		return ComboRepo.save(combo);
 	}
 
