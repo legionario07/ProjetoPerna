@@ -3,6 +3,7 @@ package br.com.projetoperna.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,9 +27,9 @@ public class Pedido implements Serializable {
 	private Long id;
 	@Column(name="valor_total")
 	private BigDecimal valorTotal;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.REFRESH)
 	private Produto produto;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.REFRESH)
 	private Combo combo;
 	private Integer total;
 	private BigDecimal desconto;
