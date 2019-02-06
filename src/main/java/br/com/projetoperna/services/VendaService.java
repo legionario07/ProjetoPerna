@@ -54,7 +54,13 @@ public class VendaService {
 		try {
 
 			for (Pedido pedido : venda.getPedidos()) {
-				pedidoRepo.save(pedido);
+				
+				if(pedido.getCombo().getId()==null) {
+					pedido.setCombo(null);
+				}else if(pedido.getProduto().getId()==null) {
+					pedido.setProduto(null);
+				}
+				pedido = pedidoRepo.save(pedido);
 
 				// É combo ou produto?
 				if (pedido.getProduto() instanceof Produto) {
@@ -69,19 +75,19 @@ public class VendaService {
 
 					produtoRepo.save(produto);
 				} else {
-//
-//					Combo combo = (Combo) pedido.getProduto();
-//					for (Produto p : combo.getProdutos()) {
-//						p.decrementarProduto(1);
-//
-//						if (p.isSubProduto()) {
-//							validarSubProduto(p);
-//						} else {
-//							validarProdutoPai(p, pedido.getTotal());
-//						}
-//
-//						produtoRepo.save(p);
-//					}
+
+					Combo combo = pedido.getCombo();
+					for (Produto p : combo.getProdutos()) {
+						p.decrementarProduto(1);
+
+						if (p.isSubProduto()) {
+							validarSubProduto(p);
+						} else {
+							validarProdutoPai(p, pedido.getTotal());
+						}
+
+						produtoRepo.save(p);
+					}
 
 				}
 
@@ -128,7 +134,7 @@ public class VendaService {
 		Produto produtoSubProduto = produtoRepo.findByEanPai(produto.getEan());
 
 		if (produtoSubProduto != null) {
-			Integer resto = produtoSubProduto.getQtde() * qtde;
+			Integer resto = produtoSubProduto.getQtdeSubProduto() * qtde;
 			
 			if (produtoSubProduto.getQtde() - resto < 0) {
 				produtoSubProduto.setQtde(0);
