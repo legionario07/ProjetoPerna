@@ -83,6 +83,22 @@ public class VendaController {
 		return response;
 
 	}
+	
+	@PostMapping(path = "/saveSemDecrementar", produces = "application/json", consumes = "application/json")
+	public ResponseEntity<Venda> savePedido(@RequestBody Venda venda) {
+
+		ResponseEntity<Venda> response = null;
+
+		try {
+			venda = vendaService.saveSemDecrementar(venda);
+			response = new ResponseEntity<>(venda, HttpStatus.OK);
+		} catch (Exception e) {
+			response = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+
+		return response;
+
+	}
 
 	@GetMapping(path = "/findByDataVenda", produces = "application/json")
 	public ResponseEntity<Venda> findByDataVenda(@RequestParam(value = "dataVenda") String dataVenda) {

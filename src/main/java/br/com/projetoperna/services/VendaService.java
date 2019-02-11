@@ -84,9 +84,9 @@ public class VendaService {
 
 			for (Pedido pedido : venda.getPedidos()) {
 				
-				if(pedido.getCombo().getId()==null) {
+				if(pedido.getCombo()==null || pedido.getCombo().getId() ==null) {
 					pedido.setCombo(null);
-				}else if(pedido.getProduto().getId()==null) {
+				}else if(pedido.getProduto()==null || pedido.getProduto().getId() ==null) {
 					pedido.setProduto(null);
 				}
 				pedido = pedidoRepo.save(pedido);
@@ -131,6 +131,30 @@ public class VendaService {
 
 	}
 
+	public Venda saveSemDecrementar(Venda venda) {
+
+		try {
+			for(Pedido pedido : venda.getPedidos()) {
+				
+				if(pedido.getCombo()==null || pedido.getCombo().getId() ==null) {
+					pedido.setCombo(null);
+				}else if(pedido.getProduto()==null|| pedido.getProduto().getId() ==null) {
+					pedido.setProduto(null);
+				}
+				pedido = pedidoRepo.save(pedido);
+				
+			}
+
+			venda = vendaRepo.save(venda);
+		} catch (Exception e) {
+			return null;
+		}
+
+		return venda;
+
+	}
+
+	
 	public boolean delete(Long id) {
 
 		try {
