@@ -2,6 +2,7 @@ package br.com.projetoperna.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -47,6 +48,34 @@ public class VendaService {
 
 	public List<Venda> findAll() {
 		return vendaRepo.findAll();
+	}
+	
+
+	public List<Venda> findAllVendasAbertas() {
+		List<Venda> vendasTemp = new ArrayList<Venda>();
+		
+		for(Venda v : vendaRepo.findAll()) {
+			if(!v.getIsClosed()) {
+				vendasTemp.add(v);
+			}
+		}
+		
+		return vendasTemp;
+		
+	}
+	
+
+	public List<Venda> findAllVendasFechadas() {
+	List<Venda> vendasTemp = new ArrayList<Venda>();
+		
+		for(Venda v : vendaRepo.findAll()) {
+			if(v.getIsClosed()) {
+				vendasTemp.add(v);
+			}
+		}
+		
+		return vendasTemp;
+		
 	}
 
 	public Venda save(Venda venda) {

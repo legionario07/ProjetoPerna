@@ -45,6 +45,10 @@ public class Venda implements Serializable {
 	private List<Pedido> pedidos;
 	@ManyToOne
 	private Usuario usuario;
+	@Column(name="nome_cliente")
+	private String nomeCliente;
+	@Column(name="is_closed")
+	private Boolean isClosed;
 	
 	public Venda(Long id) {
 		this();
@@ -88,6 +92,22 @@ public class Venda implements Serializable {
 
 	public void setDataVenda(Long dataVenda) {
 		this.dataVenda = dataVenda;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public Boolean getIsClosed() {
+		return isClosed;
+	}
+
+	public void setIsClosed(Boolean isClosed) {
+		this.isClosed = isClosed;
 	}
 	
 	

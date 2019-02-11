@@ -41,9 +41,29 @@ public class VendaController {
 	@GetMapping(produces = "application/json")
 	public ResponseEntity<List<Venda>> findAll() {
 
-		List<Venda> perfis = vendaService.findAll();
+		List<Venda> vendas = vendaService.findAll();
 
-		ResponseEntity<List<Venda>> response = new ResponseEntity<>(perfis, HttpStatus.OK);
+		ResponseEntity<List<Venda>> response = new ResponseEntity<>(vendas, HttpStatus.OK);
+
+		return response;
+	}
+	
+	@GetMapping(path = "/findAllVendasAbertas", produces = "application/json")
+	public ResponseEntity<List<Venda>> findAllVendasAbertas() {
+
+		List<Venda> vendas = vendaService.findAllVendasAbertas();
+
+		ResponseEntity<List<Venda>> response = new ResponseEntity<>(vendas, HttpStatus.OK);
+
+		return response;
+	}
+	
+	@GetMapping(path = "/findAllVendasFechadas", produces = "application/json")
+	public ResponseEntity<List<Venda>> findAllVendasFechadas() {
+
+		List<Venda> vendas = vendaService.findAllVendasFechadas();
+
+		ResponseEntity<List<Venda>> response = new ResponseEntity<>(vendas, HttpStatus.OK);
 
 		return response;
 	}
