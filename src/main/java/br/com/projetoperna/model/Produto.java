@@ -50,7 +50,7 @@ public class Produto implements Serializable{
 	private BigDecimal valorCompra;
 	@ManyToOne
 	private Marca marca;
-	@Column(name = "ean_pai")
+	@Column(name = "ean_pai", unique = true)
 	private String eanPai;
 	@Column(name = "is_sub_produto")
 	private boolean isSubProduto;

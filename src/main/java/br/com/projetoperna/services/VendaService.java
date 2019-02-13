@@ -246,7 +246,7 @@ public class VendaService {
 			
 			produtoRepo.save(produtoSubProduto);
 			
-			validarSeExisteMix(produtoSubProduto, qtde);
+			validarSeExisteMix(produtoSubProduto, qtde*produtoSubProduto.getQtdeSubProduto());
 			
 		}
 
