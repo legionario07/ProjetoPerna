@@ -26,6 +26,11 @@ public class ProdutoService {
 		return ProdutoRepo.findAllByOrderByNomeAsc();
 	}
 
+	public Produto findByEanAndIsSubProduto(String eanPai, Boolean isSubProduto) {
+		
+		return ProdutoRepo.findByEanAndIsSubProduto(eanPai, isSubProduto);
+	}
+	
 	public Produto save(Produto Produto) {
 		return ProdutoRepo.save(Produto);
 	}

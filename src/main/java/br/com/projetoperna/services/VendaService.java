@@ -97,7 +97,12 @@ public class VendaService {
 					produto.decrementarProduto(pedido.getTotal());
 
 					if (produto.isSubProduto()) {
-						validarSubProduto(produto);
+						Produto temp = validarSubProdutoMix(produto);
+						if(temp!=null) {
+							validarSubProduto(temp);
+						}else {
+							validarSubProduto(produto);
+						}
 					} else {
 						validarProdutoPai(produto, pedido.getTotal());
 					}
@@ -110,7 +115,12 @@ public class VendaService {
 						p.decrementarProduto(1);
 
 						if (p.isSubProduto()) {
-							validarSubProduto(p);
+							Produto temp = validarSubProdutoMix(p);
+							if(temp!=null) {
+								validarSubProduto(temp);
+							}else {
+								validarSubProduto(p);
+							}
 						} else {
 							validarProdutoPai(p, pedido.getTotal());
 						}
@@ -173,6 +183,7 @@ public class VendaService {
 			resto++;
 		}
 
+		
 		Produto paiProduto = produtoRepo.findByEan(produto.getEanPai());
 
 		if (paiProduto != null) {
@@ -180,6 +191,24 @@ public class VendaService {
 			produtoRepo.save(paiProduto);
 		}
 
+	}
+	
+	private Produto validarSubProdutoMix(Produto produto) {
+
+		Integer resto = produto.getQtde() / produto.getQtdeSubProduto();
+		if ((resto * produto.getQtdeSubProduto() < produto.getQtde())) {
+			resto++;
+		}
+
+		
+		Produto paiProduto = produtoRepo.findByEanAndIsSubProduto(produto.getEanPai(), true);
+
+		if (paiProduto != null) {
+			paiProduto.setQtde(resto);
+			produtoRepo.save(paiProduto);
+		}
+
+		return paiProduto;
 	}
 
 	private void validarProdutoPai(Produto produto, Integer qtde) {

@@ -13,6 +13,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	Produto findByNome(String nome);
 	Produto findByEan(String ean);
 	Produto findByEanPai(String eanPai);
+	Produto findByEanAndIsSubProduto(String ean, Boolean isSubProduto);
 	List<Produto> findAllByOrderByNomeAsc();
 	
 }
