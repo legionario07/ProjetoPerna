@@ -101,6 +101,7 @@ public class VendaService {
 						if(temp!=null) {
 							validarSubProduto(temp);
 						}else {
+							validarSeExisteMix(produto, pedido.getTotal());
 							validarSubProduto(produto);
 						}
 					} else {
@@ -119,6 +120,7 @@ public class VendaService {
 							if(temp!=null) {
 								validarSubProduto(temp);
 							}else {
+								validarSeExisteMix(p, pedido.getTotal());
 								validarSubProduto(p);
 							}
 						} else {
@@ -210,6 +212,24 @@ public class VendaService {
 
 		return paiProduto;
 	}
+	
+	private Produto validarSeExisteMix(Produto produto, Integer total) {
+
+	
+		Produto filhoProduto = produtoRepo.findByEanPaiAndIsSubProduto(produto.getEan(), true);
+
+		if (filhoProduto != null) {
+			
+			int qtde = (Integer) total * filhoProduto.getQtdeSubProduto();
+			
+			qtde = filhoProduto.getQtde()-qtde;
+			
+			filhoProduto.setQtde(qtde);
+			produtoRepo.save(filhoProduto);
+		}
+
+		return filhoProduto;
+	}
 
 	private void validarProdutoPai(Produto produto, Integer qtde) {
 
@@ -225,6 +245,8 @@ public class VendaService {
 			}
 			
 			produtoRepo.save(produtoSubProduto);
+			
+			validarSeExisteMix(produtoSubProduto, qtde);
 			
 		}
 

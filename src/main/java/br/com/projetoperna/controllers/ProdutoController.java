@@ -94,6 +94,37 @@ public class ProdutoController {
 		return response;
 
 	}
+	
+	@GetMapping(path = "/findByEanPaiAndIsSubProduto", produces = "application/json")
+	public ResponseEntity<Produto> findByEanPaiAndIsSubProduto(@RequestParam(value = "eanPai") String eanPai, 
+			@RequestParam(value = "isSubProduto") Boolean isSubProduto) {
+
+		ResponseEntity<Produto> response = null;
+
+		try {
+			response = new ResponseEntity<Produto>(produtoService.findByEanPaiAndIsSubProduto(eanPai, isSubProduto), HttpStatus.OK);
+		} catch (Exception e) {
+			response = new ResponseEntity<Produto>(HttpStatus.NOT_FOUND);
+		}
+
+		return response;
+
+	}
+	
+	@GetMapping(path = "/findByEanPai", produces = "application/json")
+	public ResponseEntity<Produto> findByEanPai(@RequestParam(value = "eanPai") String eanPai) {
+
+		ResponseEntity<Produto> response = null;
+
+		try {
+			response = new ResponseEntity<Produto>(produtoService.findByEanPai(eanPai), HttpStatus.OK);
+		} catch (Exception e) {
+			response = new ResponseEntity<Produto>(HttpStatus.NOT_FOUND);
+		}
+
+		return response;
+
+	}
 
 	@DeleteMapping(path = "/delete", produces = "application/json")
 	public ResponseEntity<Boolean> delete(@RequestParam(value = "id") Long id) {
