@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.projetoperna.model.Categoria;
 import br.com.projetoperna.model.Produto;
+import br.com.projetoperna.repository.CategoriaRepository;
 import br.com.projetoperna.repository.ProdutoRepository;
 
 @Service
@@ -13,6 +15,9 @@ public class ProdutoService {
 
 	@Autowired
 	private ProdutoRepository ProdutoRepo;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 
 	public Produto find(Long id) {
 		return ProdutoRepo.findById(id).get();
@@ -25,6 +30,12 @@ public class ProdutoService {
 	public List<Produto> findAll() {
 		return ProdutoRepo.findAllByOrderByNomeAsc();
 	}
+	
+	public List<Produto> findByCategoriaId(Long categoriaId) {
+		Categoria categoria = categoriaRepository.findById(categoriaId).get();
+		return ProdutoRepo.findByCategoriaId(categoria);
+	}
+
 
 	public Produto findByEanAndIsSubProduto(String eanPai, Boolean isSubProduto) {
 		

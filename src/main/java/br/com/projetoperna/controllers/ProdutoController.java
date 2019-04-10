@@ -125,6 +125,21 @@ public class ProdutoController {
 		return response;
 
 	}
+	
+	@GetMapping(path = "/findByCategoriaId", produces = "application/json")
+	public ResponseEntity<List<Produto>> findByCategoraId(@RequestParam(value = "categoriaId") Long categoriaId) {
+
+		ResponseEntity<List<Produto>> response = null;
+
+		try {
+			response = new ResponseEntity<List<Produto>>(produtoService.findByCategoriaId(categoriaId), HttpStatus.OK);
+		} catch (Exception e) {
+			response = new ResponseEntity<List<Produto>>(HttpStatus.NOT_FOUND);
+		}
+
+		return response;
+
+	}
 
 	@DeleteMapping(path = "/delete", produces = "application/json")
 	public ResponseEntity<Boolean> delete(@RequestParam(value = "id") Long id) {
