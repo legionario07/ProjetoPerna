@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.projetoperna.exceptions.ProdutoSubProdutoException;
 import br.com.projetoperna.model.Produto;
 import br.com.projetoperna.services.ProdutoService;
 
@@ -155,5 +156,6 @@ public class ProdutoController {
 
 		return response;
 	}
+
 
 }

@@ -52,30 +52,12 @@ public class VendaService {
 	
 
 	public List<Venda> findAllVendasAbertas() {
-//		List<Venda> vendasTemp = new ArrayList<Venda>();
-//		
-//		for(Venda v : vendaRepo.findAll()) {
-//			if(!v.getIsClosed()) {
-//				vendasTemp.add(v);
-//			}
-//		}
-//		
-//		return vendasTemp;
 		
 		return vendaRepo.findByIsClosed(false);
 	}
 	
 
 	public List<Venda> findAllVendasFechadas() {
-//	List<Venda> vendasTemp = new ArrayList<Venda>();
-//		
-//		for(Venda v : vendaRepo.findAll()) {
-//			if(v.getIsClosed()) {
-//				vendasTemp.add(v);
-//			}
-//		}
-//		
-//		return vendasTemp;
 		
 		return vendaRepo.findByIsClosed(true);
 		
